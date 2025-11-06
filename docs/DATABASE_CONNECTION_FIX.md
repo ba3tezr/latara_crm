@@ -265,7 +265,7 @@ bash start-server.sh
 ### **2. مراقبة النظام:**
 ```bash
 # لوحة التحكم الويب
-https://elkhawaga.uk/monitoring/
+https://origin.app/monitoring/
 
 # مراقبة من سطر الأوامر
 python manage.py monitor_db
@@ -329,7 +329,7 @@ python manage.py monitor_db --stats
 4. إعادة تشغيل الخدمات: `homeupdate-services restart`
 
 ### **مراقبة الأداء:**
-- لوحة التحكم: https://elkhawaga.uk/monitoring/
+- لوحة التحكم: https://origin.app/monitoring/
 - فحص صحة النظام: `/api/monitoring/health/`
 - سجلات النظام: `/tmp/db_connections_monitor.log`
 

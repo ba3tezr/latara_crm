@@ -163,14 +163,14 @@ class Migration(migrations.Migration):
                 (
                     'name',
                     models.CharField(
-                        default='Elkhawaga', max_length=200, verbose_name='اسم الشركة'
+                        default='ORIGIN.APP', max_length=200, verbose_name='اسم الشركة'
                     ),
                 ),
                 (
                     'copyright_text',
                     models.CharField(
                         blank=True,
-                        default='جميع الحقوق محفوظة لشركة الخواجة للستائر والمفروشات تطوير zakee tahawi',
+                        default='جميع الحقوق محفوظة لشركة ORIGIN.APP تطوير zakee tahawi',
                         max_length=255,
                         verbose_name='نص حقوق النشر',
                     ),
@@ -242,13 +242,13 @@ class Migration(migrations.Migration):
                 (
                     'company_name',
                     models.CharField(
-                        default='Elkhawaga', max_length=200, verbose_name='اسم الشركة'
+                        default='ORIGIN.APP', max_length=200, verbose_name='اسم الشركة'
                     ),
                 ),
                 (
                     'contact_email',
                     models.EmailField(
-                        default='info@elkhawaga.com',
+                        default='info@origin.app',
                         max_length=254,
                         verbose_name='البريد الإلكتروني للاتصال',
                     ),

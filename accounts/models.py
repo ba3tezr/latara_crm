@@ -212,11 +212,11 @@ class CompanyInfo(models.Model):
     developer = models.CharField(max_length=100, blank=True, default='zakee tahawi', verbose_name='المطور', editable=False)
     working_hours = models.CharField(max_length=100, blank=True, default='', verbose_name='ساعات العمل')
     # اسم الشركة
-    name = models.CharField(max_length=200, default='Elkhawaga', verbose_name='اسم الشركة')
+    name = models.CharField(max_length=200, default='ORIGIN.APP', verbose_name='اسم الشركة')
     # نص حقوق النشر المخصص
     copyright_text = models.CharField(
         max_length=255,
-        default='جميع الحقوق محفوظة لشركة الخواجة للستائر والمفروشات تطوير zakee tahawi',
+        default='جميع الحقوق محفوظة لشركة ORIGIN.APP تطوير zakee tahawi',
         verbose_name='نص حقوق النشر',
         blank=True
     )
@@ -350,9 +350,9 @@ class ContactFormSettings(models.Model):
     title = models.CharField(max_length=100, default='اتصل بنا', verbose_name='عنوان الصفحة')
     description = models.TextField(blank=True, null=True, verbose_name='وصف الصفحة')
     # اسم الشركة المعروض في صفحة الاتصال
-    company_name = models.CharField(max_length=200, default='Elkhawaga', verbose_name='اسم الشركة')
+    company_name = models.CharField(max_length=200, default='ORIGIN.APP', verbose_name='اسم الشركة')
     # معلومات جهات الاتصال
-    contact_email = models.EmailField(default='info@elkhawaga.com', verbose_name='البريد الإلكتروني للاتصال')
+    contact_email = models.EmailField(default='info@origin.app', verbose_name='البريد الإلكتروني للاتصال')
     contact_phone = models.CharField(max_length=20, default='+20 123 456 7890', verbose_name='رقم الهاتف للاتصال')
     contact_address = models.TextField(blank=True, null=True, verbose_name='عنوان المكتب')
     contact_hours = models.CharField(max_length=100, default='9 صباحاً - 5 مساءً', verbose_name='ساعات العمل')

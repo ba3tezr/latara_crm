@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_new.html' %}
 {% load i18n %}
 {% load static %}
 {% load unified_status_tags %}
@@ -6,113 +6,165 @@
 {% block title %}{% trans 'المعاينات' %}{% endblock %}
 
 {% block content %}
-<div class="container-fluid mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>{% trans 'المعاينات' %}</h2>
-        <div class="d-flex gap-2">
-            <a href="{% url 'inspections:inspection_schedule' %}" class="btn btn-info">
-                <i class="fas fa-calendar-alt"></i> البرنامج اليومي
-            </a>
-            <a href="{% url 'inspections:inspection_report_create' %}" class="btn btn-success">
-                <i class="fas fa-file-alt"></i> تقرير جديد
-            </a>
-            <a href="{% url 'inspections:inspection_create' %}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> {% trans 'إضافة معاينة' %}
-            </a>
+<div class="row g-4">
+    <!-- Header Card -->
+    <div class="col-12">
+        <div class="card shadow-sm" style="border: none; background: white;">
+            <div class="card-header d-flex justify-content-between align-items-center" style="background: #2c3e50; color: white; border: none; border-radius: 0.5rem 0.5rem 0 0;">
+                <h5 class="mb-0 fw-bold" style="color: white !important;">
+                    <i class="fas fa-clipboard-check me-2"></i>
+                    إدارة المعاينات
+                </h5>
+                <div class="d-flex gap-2">
+                    <a href="{% url 'inspections:inspection_schedule' %}" class="btn btn-sm shadow-sm" style="background: #3498db; color: white; border: none;">
+                        <i class="fas fa-calendar-alt me-1"></i> البرنامج
+                    </a>
+                    <a href="{% url 'inspections:inspection_report_create' %}" class="btn btn-sm shadow-sm" style="background: #f39c12; color: white; border: none;">
+                        <i class="fas fa-file-alt me-1"></i> تقرير
+                    </a>
+                    <a href="{% url 'inspections:inspection_create' %}" class="btn btn-sm shadow-sm" style="background: #27ae60; color: white; border: none;">
+                        <i class="fas fa-plus me-1"></i> معاينة جديدة
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Dashboard -->
-    <div class="row mb-4">
-        <div class="col">
-            <a href="{% url 'inspections:inspection_list' %}" class="text-decoration-none">
-                <div class="card text-center shadow-sm border-primary dashboard-card-hover">
-                    <div class="card-body">
-                        <i class="fas fa-list-alt fa-2x text-primary mb-2"></i>
-                        <h5 class="card-title">{% trans 'إجمالي المعاينات' %}</h5>
-                        <span class="display-6 fw-bold">{{ dashboard.total_inspections|default:0 }}</span>
+    <!-- Stats Dashboard -->
+    <div class="col-12">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <a href="{% url 'inspections:inspection_list' %}" class="text-decoration-none">
+                    <div class="card text-white shadow-sm" style="background: #4a90e2; border: none;">
+                        <div class="card-body py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">إجمالي المعاينات</h6>
+                                    <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ dashboard.total_inspections|default:0 }}</h3>
+                                </div>
+                                <div style="font-size: 2.5rem; opacity: 0.3;">
+                                    <i class="fas fa-list-alt"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="{% url 'inspections:inspection_list' %}?status=pending&from_orders=1" class="text-decoration-none">
-                <div class="card text-center shadow-sm border-warning dashboard-card-hover">
-                    <div class="card-body">
-                        <i class="fas fa-file-alt fa-2x text-warning mb-2"></i>
-                        <h5 class="card-title">{% trans 'المعاينات الجديدة' %}</h5>
-                        <span class="display-6 fw-bold">{{ dashboard.new_inspections|default:0 }}</span>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'inspections:inspection_list' %}?status=pending&from_orders=1" class="text-decoration-none">
+                    <div class="card text-white shadow-sm" style="background: #f39c12; border: none;">
+                        <div class="card-body py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">معاينات جديدة</h6>
+                                    <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ dashboard.new_inspections|default:0 }}</h3>
+                                </div>
+                                <div style="font-size: 2.5rem; opacity: 0.3;">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="{% url 'inspections:inspection_list' %}?status=scheduled" class="text-decoration-none">
-                <div class="card text-center shadow-sm border-info dashboard-card-hover">
-                    <div class="card-body">
-                        <i class="fas fa-calendar-check fa-2x text-info mb-2"></i>
-                        <h5 class="card-title">{% trans 'المعاينات المجدولة' %}</h5>
-                        <span class="display-6 fw-bold">{{ dashboard.scheduled_inspections|default:0 }}</span>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'inspections:inspection_list' %}?status=scheduled" class="text-decoration-none">
+                    <div class="card text-white shadow-sm" style="background: #3498db; border: none;">
+                        <div class="card-body py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">مجدولة</h6>
+                                    <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ dashboard.scheduled_inspections|default:0 }}</h3>
+                                </div>
+                                <div style="font-size: 2.5rem; opacity: 0.3;">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="{% url 'inspections:completed_details' %}" class="text-decoration-none">
-                <div class="card text-center shadow-sm border-success dashboard-card-hover">
-                    <div class="card-body">
-                        <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
-                        <h5 class="card-title">{% trans 'الناجحة' %}</h5>
-                        <span class="display-6 fw-bold">{{ dashboard.successful_inspections|default:0 }}</span>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'inspections:completed_details' %}" class="text-decoration-none">
+                    <div class="card text-white shadow-sm" style="background: #27ae60; border: none;">
+                        <div class="card-body py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">الناجحة</h6>
+                                    <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ dashboard.successful_inspections|default:0 }}</h3>
+                                </div>
+                                <div style="font-size: 2.5rem; opacity: 0.3;">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="{% url 'inspections:cancelled_details' %}" class="text-decoration-none">
-                <div class="card text-center shadow-sm border-danger dashboard-card-hover">
-                    <div class="card-body">
-                        <i class="fas fa-times-circle fa-2x text-danger mb-2"></i>
-                        <h5 class="card-title">{% trans 'الملغاة' %}</h5>
-                        <span class="display-6 fw-bold">{{ dashboard.cancelled_inspections|default:0 }}</span>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'inspections:cancelled_details' %}" class="text-decoration-none">
+                    <div class="card text-white shadow-sm" style="background: #e74c3c; border: none;">
+                        <div class="card-body py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">الملغاة</h6>
+                                    <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ dashboard.cancelled_inspections|default:0 }}</h3>
+                                </div>
+                                <div style="font-size: 2.5rem; opacity: 0.3;">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="{% url 'inspections:inspection_list' %}?status=postponed_by_customer" class="text-decoration-none">
-                <div class="card text-center shadow-sm border-secondary dashboard-card-hover">
-                    <div class="card-body">
-                        <i class="fas fa-pause-circle fa-2x text-secondary mb-2"></i>
-                        <h5 class="card-title">مؤجل من طرف العميل</h5>
-                        <span class="display-6 fw-bold">{{ dashboard.postponed_by_customer_inspections|default:0 }}</span>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'inspections:inspection_list' %}?status=postponed_by_customer" class="text-decoration-none">
+                    <div class="card text-white shadow-sm" style="background: #95a5a6; border: none;">
+                        <div class="card-body py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">مؤجلة</h6>
+                                    <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ dashboard.postponed_by_customer_inspections|default:0 }}</h3>
+                                </div>
+                                <div style="font-size: 2.5rem; opacity: 0.3;">
+                                    <i class="fas fa-pause-circle"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="{% url 'inspections:inspection_list' %}?is_duplicated=1" class="text-decoration-none">
-                <div class="card text-center shadow-sm border-secondary dashboard-card-hover">
-                    <div class="card-body">
-                        <i class="fas fa-copy fa-2x text-secondary mb-2"></i>
-                        <h5 class="card-title">{% trans 'المعاينات المكررة' %}</h5>
-                        <span class="display-6 fw-bold">{{ dashboard.duplicated_inspections|default:0 }}</span>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'inspections:inspection_list' %}?is_duplicated=1" class="text-decoration-none">
+                    <div class="card text-white shadow-sm" style="background: #34495e; border: none;">
+                        <div class="card-body py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">مكررة</h6>
+                                    <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ dashboard.duplicated_inspections|default:0 }}</h3>
+                                </div>
+                                <div style="font-size: 2.5rem; opacity: 0.3;">
+                                    <i class="fas fa-copy"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
-    <style>
-    .dashboard-card-hover:hover {
-        box-shadow: 0 0 0 0.2rem #0d6efd33;
-        transform: scale(1.03);
-        transition: 0.2s;
-    }
-    </style>
 
-    <!-- Search and Filter Form -->
-    <div class="card mb-4">
-        <div class="card-body">
+    <!-- Search and Filter Card -->
+    <div class="col-12">
+        <div class="card shadow-sm" style="border: none; background: white;">
+            <div class="card-header" style="background: #f8f9fa; border: none;">
+                <h6 class="mb-0 fw-bold" style="color: #2c3e50;">
+                    <i class="fas fa-filter me-2"></i>
+                    البحث والتصفية
+                </h6>
+            </div>
+            <div class="card-body">
             <form method="get" class="row g-3 align-items-end">
                 <div class="col-md-2">
                     <input type="text" name="q" class="form-control" placeholder="بحث بكود العميل أو اسم العميل أو رقم الطلب..." value="{{ request.GET.q }}">

@@ -1,22 +1,149 @@
-{% extends 'base.html' %}
+{% extends 'base_new.html' %}
 {% load static %}
 
-{% block title %}الصفحة الرئيسية - نظام الخواجه لإدارة العملاء{% endblock %}
+{% block title %}الصفحة الرئيسية - ORIGIN.APP{% endblock %}
+
+{% block page_title %}الصفحة الرئيسية{% endblock %}
 
 {% block content %}
-<div class="d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 200px);">
-    <div class="col-md-5">
-        <div class="card text-center shadow-lg" style="background: transparent;">
-            <div class="card-body py-3" style="background: transparent;">
+<div class="row g-4">
+    <!-- Welcome Card -->
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-body text-center py-5">
                 {% if company_info.logo %}
-                    <img src="{{ company_info.logo.url }}?v={{ company_info.logo.url|length }}" alt="{{ company_info.name|default:'شعار النظام' }}" class="img-fluid mb-3 logo-img home-logo" style="width: 180px; height: auto;" id="home-logo">
+                    <img src="{{ company_info.logo.url }}" alt="{{ company_info.name }}" class="mb-4" style="width: 120px; height: auto;">
                 {% else %}
-                    <img src="{% static 'img/logo.png' %}" alt="شعار النظام" class="img-fluid mb-3 logo-img home-logo" style="width: 180px; height: auto;" id="home-logo">
+                    <img src="{% static 'img/logo.png' %}" alt="Logo" class="mb-4" style="width: 120px; height: auto;">
                 {% endif %}
-                <h2 class="card-title mb-3 welcome-title" style="color: #502d00;">مرحباً بك في نظام الخواجه لإدارة العملاء</h2>
-                <p class="card-text" style="color: #19191a;">نظام متكامل لإدارة العملاء والمبيعات والإنتاج والمخزون</p>
+                
+                <h2 class="mb-3" style="color: var(--accent-primary);">
+                    مرحباً بك في نظام ORIGIN.APP
+                </h2>
+                <p class="text-muted mb-4">
+                    نظام متكامل لإدارة العملاء والمبيعات والإنتاج والمخزون
+                </p>
+
+                {% if user.is_authenticated %}
+                <div class="alert alert-success d-inline-block">
+                    <i class="fas fa-user-check me-2"></i>
+                    مرحباً {{ user.get_full_name|default:user.username }}
+                </div>
+                {% else %}
+                <a href="{% url 'accounts:login' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    تسجيل الدخول
+                </a>
+                {% endif %}
             </div>
         </div>
     </div>
+
+    {% if user.is_authenticated %}
+    <!-- Quick Stats - Professional & Clean -->
+    <div class="col-md-3">
+        <div class="card text-white shadow-sm" style="background: #4a90e2; border: none;">
+            <div class="card-body py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">العملاء</h6>
+                        <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ customers_count|default:0 }}</h3>
+                    </div>
+                    <div style="font-size: 2.5rem; opacity: 0.3;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-white shadow-sm" style="background: #e74c3c; border: none;">
+            <div class="card-body py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">الطلبات</h6>
+                        <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ orders_count|default:0 }}</h3>
+                    </div>
+                    <div style="font-size: 2.5rem; opacity: 0.3;">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-white shadow-sm" style="background: #27ae60; border: none;">
+            <div class="card-body py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">المخزون</h6>
+                        <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ products_count|default:0 }}</h3>
+                    </div>
+                    <div style="font-size: 2.5rem; opacity: 0.3;">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-white shadow-sm" style="background: #f39c12; border: none;">
+            <div class="card-body py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">التقارير</h6>
+                        <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ reports_count|default:0 }}</h3>
+                    </div>
+                    <div style="font-size: 2.5rem; opacity: 0.3;">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="col-12">
+        <div class="card shadow-sm" style="border: none; background: white;">
+            <div class="card-header" style="background: #2c3e50; color: white; border: none; border-radius: 0.5rem 0.5rem 0 0;">
+                <h5 class="mb-0 fw-bold" style="color: white !important;">
+                    <i class="fas fa-bolt me-2"></i>
+                    إجراءات سريعة
+                </h5>
+            </div>
+            <div class="card-body" style="background: #f8f9fa; border-radius: 0 0 0.5rem 0.5rem;">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <a href="/customers/" class="btn w-100 py-3 shadow-sm" style="background: #4a90e2; color: white; border: none; transition: all 0.2s;">
+                            <i class="fas fa-user-plus d-block mb-2" style="font-size: 2rem;"></i>
+                            <span class="fw-semibold">عميل جديد</span>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/orders/" class="btn w-100 py-3 shadow-sm" style="background: #27ae60; color: white; border: none; transition: all 0.2s;">
+                            <i class="fas fa-cart-plus d-block mb-2" style="font-size: 2rem;"></i>
+                            <span class="fw-semibold">طلب جديد</span>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/inventory/" class="btn w-100 py-3 shadow-sm" style="background: #e67e22; color: white; border: none; transition: all 0.2s;">
+                            <i class="fas fa-warehouse d-block mb-2" style="font-size: 2rem;"></i>
+                            <span class="fw-semibold">إدارة المخزون</span>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/reports/list/" class="btn w-100 py-3 shadow-sm" style="background: #f39c12; color: white; border: none; transition: all 0.2s;">
+                            <i class="fas fa-file-alt d-block mb-2" style="font-size: 2rem;"></i>
+                            <span class="fw-semibold">التقارير</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_new.html' %}
 {% load static %}
 {% load humanize %}
 
@@ -259,33 +259,38 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <!-- Page Header -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0" style="color: var(--primary); font-weight: bold;">
-            <i class="fas fa-industry me-2"></i>لوحة تحكم المصنع
-        </h1>
-        <div class="btn-group">
-            <a href="{% url 'manufacturing:order_list' %}" class="btn btn-primary">
-                <i class="fas fa-list me-2"></i>عرض كل الطلبات
-            </a>
-            <a href="{% url 'manufacturing:vip_orders' %}" class="btn btn-warning">
-                <i class="fas fa-crown me-2"></i>طلبات VIP
-            </a>
-            <a href="{% url 'manufacturing:fabric_receipt' %}" class="btn btn-info">
-                <i class="fas fa-industry me-2"></i>استلام من المصنع
-            </a>
-            <a href="{% url 'manufacturing:product_receipt' %}" class="btn btn-success">
-                <i class="fas fa-warehouse me-2"></i>استلام من المخازن
-            </a>
-            <a href="{% url 'manufacturing:order_create' %}" class="btn btn-secondary">
-                <i class="fas fa-plus me-2"></i>طلب جديد
-            </a>
-            {% if user.is_superuser %}
-            <a href="/admin/manufacturing/manufacturingdisplaysettings/" class="btn btn-outline-secondary">
-                <i class="fas fa-cog me-2"></i>إعدادات العرض
-            </a>
-            {% endif %}
+<div class="row g-4">
+    <!-- Page Header Card -->
+    <div class="col-12">
+        <div class="card shadow-sm" style="border: none; background: white;">
+            <div class="card-header d-flex justify-content-between align-items-center" style="background: #2c3e50; color: white; border: none; border-radius: 0.5rem 0.5rem 0 0;">
+                <h5 class="mb-0 fw-bold" style="color: white !important;">
+                    <i class="fas fa-industry me-2"></i>
+                    لوحة تحكم التصنيع
+                </h5>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="{% url 'manufacturing:order_list' %}" class="btn btn-sm shadow-sm" style="background: #4a90e2; color: white; border: none;">
+                        <i class="fas fa-list me-1"></i>كل الطلبات
+                    </a>
+                    <a href="{% url 'manufacturing:vip_orders' %}" class="btn btn-sm shadow-sm" style="background: #f39c12; color: white; border: none;">
+                        <i class="fas fa-crown me-1"></i>VIP
+                    </a>
+                    <a href="{% url 'manufacturing:fabric_receipt' %}" class="btn btn-sm shadow-sm" style="background: #3498db; color: white; border: none;">
+                        <i class="fas fa-industry me-1"></i>استلام مصنع
+                    </a>
+                    <a href="{% url 'manufacturing:product_receipt' %}" class="btn btn-sm shadow-sm" style="background: #27ae60; color: white; border: none;">
+                        <i class="fas fa-warehouse me-1"></i>استلام مخزن
+                    </a>
+                    <a href="{% url 'manufacturing:order_create' %}" class="btn btn-sm shadow-sm" style="background: #27ae60; color: white; border: none;">
+                        <i class="fas fa-plus me-1"></i>طلب جديد
+                    </a>
+                    {% if user.is_superuser %}
+                    <a href="/admin/manufacturing/manufacturingdisplaysettings/" class="btn btn-sm shadow-sm" style="background: #95a5a6; color: white; border: none;">
+                        <i class="fas fa-cog me-1"></i>إعدادات
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 
@@ -328,26 +333,34 @@
     </div>
 
     <!-- Main Statistics Cards -->
-    <div class="row mb-4">
-        <div class="col-xl-3 col-md-6">
-            <div class="stat-card">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <div class="icon">
-                            <i class="fas fa-clipboard-list"></i>
+    <div class="col-12">
+        <div class="row g-3">
+            <div class="col-xl-3 col-md-6">
+                <div class="card text-white shadow-sm" style="background: #4a90e2; border: none;">
+                    <div class="card-body py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">إجمالي الطلبات</h6>
+                                <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ total_orders|intcomma }}</h3>
+                            </div>
+                            <div style="font-size: 2.5rem; opacity: 0.3;">
+                                <i class="fas fa-clipboard-list"></i>
+                            </div>
                         </div>
-                        <div class="number">{{ total_orders|intcomma }}</div>
-                        <div class="label">إجمالي الطلبات</div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="col-xl-3 col-md-6">
-            <div class="stat-card">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <div class="icon">
+            
+            <div class="col-xl-3 col-md-6">
+                <div class="card text-white shadow-sm" style="background: #27ae60; border: none;">
+                    <div class="card-body py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1 fw-semibold" style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">قيد التنفيذ</h6>
+                                <h3 class="mb-0 fw-bold" style="font-size: 2rem;">{{ in_production|intcomma }}</h3>
+                            </div>
+                            <div style="font-size: 2.5rem; opacity: 0.3;">
+                                <i class="fas fa-cogs"></i>
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <div class="number">{{ delivered_orders|intcomma }}</div>

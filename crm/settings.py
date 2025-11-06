@@ -681,16 +681,16 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
     # نطاقات الإنتاج
-    'https://elkhawaga.uk',
-    'https://www.elkhawaga.uk',
-    'https://crm.elkhawaga.uk',
-    'https://api.elkhawaga.uk',
-    'https://admin.elkhawaga.uk',
-    'http://elkhawaga.uk',
-    'http://www.elkhawaga.uk',
-    'http://crm.elkhawaga.uk',
-    'http://api.elkhawaga.uk',
-    'http://admin.elkhawaga.uk',
+    'https://origin.app',
+    'https://www.origin.app',
+    'https://crm.origin.app',
+    'https://api.origin.app',
+    'https://admin.origin.app',
+    'http://origin.app',
+    'http://www.origin.app',
+    'http://crm.origin.app',
+    'http://api.origin.app',
+    'http://admin.origin.app',
 ]
 
 CORS_ORIGIN_WHITELIST = CORS_ALLOWED_ORIGINS  # استخدام نفس القائمة
@@ -736,11 +736,11 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1',
 
     # نطاقات الإنتاج
-    'https://elkhawaga.uk',
-    'https://www.elkhawaga.uk',
-    'https://crm.elkhawaga.uk',
-    'https://api.elkhawaga.uk',
-    'https://admin.elkhawaga.uk',
+    'https://origin.app',
+    'https://www.origin.app',
+    'https://crm.origin.app',
+    'https://api.origin.app',
+    'https://admin.origin.app',
 ] + CORS_ALLOWED_ORIGINS
 
 # إعدادات CSRF موحدة ومحسنة
@@ -958,23 +958,23 @@ EMAIL_USE_SSL = False
 
 # Admin Security
 ADMIN_URL = 'admin/'
-ADMIN_SITE_HEADER = "نظام إدارة الخواجة"
+ADMIN_SITE_HEADER = "نظام إدارة ORIGIN.APP"
 ADMIN_SITE_TITLE = "لوحة الإدارة"
-ADMIN_INDEX_TITLE = "مرحباً بك في نظام إدارة الخواجة"
+ADMIN_INDEX_TITLE = "مرحباً بك في نظام إدارة ORIGIN.APP"
 
 # Django Jazzmin Configuration
 JAZZMIN_SETTINGS = {
     # العناوين الأساسية
-    "site_title": "نظام إدارة الخواجة",
-    "site_header": "نظام إدارة الخواجة",
-    "site_brand": "الخواجة",
+    "site_title": "نظام إدارة ORIGIN.APP",
+    "site_header": "نظام إدارة ORIGIN.APP",
+    "site_brand": "ORIGIN.APP",
     "site_logo": "img/logo.png",
     "login_logo": "img/logo.png",
     "login_logo_dark": "img/logo.png",
     "site_logo_classes": "img-circle",
     "site_icon": "img/logo.png",
-    "welcome_sign": "مرحباً بك في نظام إدارة الخواجة",
-    "copyright": "نظام إدارة الخواجة",
+    "welcome_sign": "مرحباً بك في نظام إدارة ORIGIN.APP",
+    "copyright": "نظام إدارة ORIGIN.APP",
     "search_model": ["auth.User", "customers.Customer", "orders.Order"],
     "user_avatar": "accounts.User.image",
 
@@ -1127,7 +1127,7 @@ SILENCED_SYSTEM_CHECKS = ['security.W019']
 # ======================================
 # Company Settings
 # ======================================
-COMPANY_NAME = "شركة الخواجة للألمنيوم والزجاج"
+COMPANY_NAME = "شركة ORIGIN.APP"
 
 # ======================================
 # Celery Configuration
@@ -1262,7 +1262,7 @@ SESSION_SAVE_EVERY_REQUEST = False  # لا نحفظ في كل طلب لتحسي�
 
 # إعدادات Cache للعمليات الكبيرة
 CACHE_MIDDLEWARE_SECONDS = 300  # 5 دقائق
-CACHE_MIDDLEWARE_KEY_PREFIX = 'elkhawaga_'
+CACHE_MIDDLEWARE_KEY_PREFIX = 'origin_'
 
 # إعدادات Logging للعمليات الكبيرة - تم دمجها في تكوين LOGGING الرئيسي أعلاه
 

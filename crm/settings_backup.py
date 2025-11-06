@@ -41,14 +41,14 @@ if DEBUG:
     'testserver',  # للاختبارات
     ])
 
-# إضافة دومين elkhawaga.uk وجميع النطاقات الفرعية
+# إضافة دومين origin.app وجميع النطاقات الفرعية
 ALLOWED_HOSTS.extend([
-    'elkhawaga.uk',
-    'www.elkhawaga.uk',
-    'crm.elkhawaga.uk',
-    'admin.elkhawaga.uk',
-    'api.elkhawaga.uk',
-    '*.elkhawaga.uk',
+    'origin.app',
+    'www.origin.app',
+    'crm.origin.app',
+    'admin.origin.app',
+    'api.origin.app',
+    '*.origin.app',
 ])
 
 # إضافة عناوين الشبكة المحلية الشائعة
@@ -391,16 +391,16 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
     # نطاقات الإنتاج
-    'https://elkhawaga.uk',
-    'https://www.elkhawaga.uk',
-    'https://crm.elkhawaga.uk',
-    'https://api.elkhawaga.uk',
-    'https://admin.elkhawaga.uk',
-    'http://elkhawaga.uk',
-    'http://www.elkhawaga.uk',
-    'http://crm.elkhawaga.uk',
-    'http://api.elkhawaga.uk',
-    'http://admin.elkhawaga.uk',
+    'https://origin.app',
+    'https://www.origin.app',
+    'https://crm.origin.app',
+    'https://api.origin.app',
+    'https://admin.origin.app',
+    'http://origin.app',
+    'http://www.origin.app',
+    'http://crm.origin.app',
+    'http://api.origin.app',
+    'http://admin.origin.app',
 ]
 
 CORS_ORIGIN_WHITELIST = CORS_ALLOWED_ORIGINS  # استخدام نفس القائمة
@@ -440,11 +440,11 @@ if DEBUG:
 # Security and Session Settings (تم دمج الإعدادات المكررة)
 CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS + [
     # إضافة نطاقات إضافية للـ CSRF
-    'https://elkhawaga.uk',
-    'https://www.elkhawaga.uk',
-    'https://crm.elkhawaga.uk',
-    'https://api.elkhawaga.uk',
-    'https://admin.elkhawaga.uk',
+    'https://origin.app',
+    'https://www.origin.app',
+    'https://crm.origin.app',
+    'https://api.origin.app',
+    'https://admin.origin.app',
 ]
 
 # إعدادات CSRF موحدة
@@ -708,8 +708,8 @@ CSRF_COOKIE_SAMESITE = 'Lax'
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
-    'https://elkhawaga.uk',
-    'https://www.elkhawaga.uk',
+    'https://origin.app',
+    'https://www.origin.app',
 ]
 
 # Password Security
@@ -769,6 +769,6 @@ EMAIL_USE_SSL = False
 
 # Admin Security
 ADMIN_URL = 'admin/'
-ADMIN_SITE_HEADER = "نظام إدارة الخواجة"
+ADMIN_SITE_HEADER = "نظام إدارة ORIGIN.APP"
 ADMIN_SITE_TITLE = "لوحة الإدارة"
-ADMIN_INDEX_TITLE = "مرحباً بك في نظام إدارة الخواجة"
+ADMIN_INDEX_TITLE = "مرحباً بك في نظام إدارة ORIGIN.APP"

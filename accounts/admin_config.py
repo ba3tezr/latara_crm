@@ -13,7 +13,7 @@ class UserActivityAdminConfig:
     def customize_admin_site():
         """تخصيص موقع الإدارة الرئيسي"""
         # تخصيص العناوين
-        admin.site.site_header = "📊 نظام إدارة الخواجة - لوحة التحكم"
+        admin.site.site_header = "📊 نظام إدارة ORIGIN.APP - لوحة التحكم"
         admin.site.site_title = "إدارة النظام"
         admin.site.index_title = "مرحباً بك في لوحة التحكم"
         

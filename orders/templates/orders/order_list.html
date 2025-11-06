@@ -1,8 +1,9 @@
-{% extends 'base.html' %}
-{% load unified_status_tags %}
+{% extends 'base_new.html' %}
 {% load unified_status_tags %}
 
-{% block title %}الطلبات - نظام الخواجه{% endblock %}
+{% block title %}الطلبات - ORIGIN.APP{% endblock %}
+
+{% block page_title %}قائمة الطلبات{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -265,30 +266,40 @@ document.addEventListener('DOMContentLoaded', function() {
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2><i class="fas fa-shopping-cart"></i> الطلبات</h2>
-        <a href="{% url 'orders:order_create' %}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> طلب جديد
-        </a>
+<div class="row g-4">
+    <!-- Header Card -->
+    <div class="col-12">
+        <div class="card shadow-sm" style="border: none; background: white;">
+            <div class="card-header d-flex justify-content-between align-items-center" style="background: #2c3e50; color: white; border: none; border-radius: 0.5rem 0.5rem 0 0;">
+                <h5 class="mb-0 fw-bold" style="color: white !important;">
+                    <i class="fas fa-shopping-cart me-2"></i>
+                    إدارة الطلبات
+                </h5>
+                <a href="{% url 'orders:order_create' %}" class="btn btn-sm shadow-sm" style="background: #27ae60; color: white; border: none;">
+                    <i class="fas fa-plus me-1"></i> طلب جديد
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <!-- Orders Filter -->
+                {% include 'includes/orders_filter.html' %}
+            </div>
+        </div>
     </div>
 
-    <!-- Orders Filter -->
-    {% include 'includes/orders_filter.html' %}
-
-    <!-- Orders List -->
-    <div class="card">
-        <div class="card-header bg-light">
-            <div class="row align-items-center">
-                <div class="col">
-                    <h5 class="mb-0">
-                        قائمة الطلبات
-                        <span class="badge bg-primary ms-2">
-                            <i class="fas fa-list-ol me-1"></i>
-                            عدد النتائج: {{ page_obj.paginator.count }}
-                        </span>
-                    </h5>
-                </div>
+    <!-- Orders List Card -->
+    <div class="col-12">
+        <div class="card shadow-sm" style="border: none; background: white;">
+            <div class="card-header" style="background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%); color: white; border: none;">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h6 class="mb-0 fw-bold" style="color: white !important;">
+                            <i class="fas fa-list me-2"></i>
+                            قائمة الطلبات
+                            <span class="badge ms-2" style="background: rgba(255,255,255,0.3); color: white;">
+                                {{ page_obj.paginator.count }} طلب
+                            </span>
+                        </h6>
+                    </div>
                 {% if page_obj.paginator.num_pages > 1 %}
                 <div class="col-auto">
                     <small class="text-muted">

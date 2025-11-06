@@ -1,0 +1,279 @@
+/**
+ * ===================================================================
+ * HOME PAGE ENHANCEMENTS
+ * ===================================================================
+ * Professional styling for home page with color palette
+ * Clean, modern, and responsive design
+ * ===================================================================
+ */
+
+/* ===================================================================
+   Color Palette - Logo Colors
+   ================================================================ */
+:root {
+    --home-blue: #4a90e2;
+    --home-red: #e74c3c;
+    --home-green: #27ae60;
+    --home-orange: #f39c12;
+    --home-dark: #2c3e50;
+    --home-light: #f8f9fa;
+}
+
+/* ===================================================================
+   Card Enhancements - Smooth Transitions
+   ================================================================ */
+
+/* Stats Cards - Hover Effects */
+.card.text-white {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card.text-white::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.card.text-white:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.card.text-white:hover::before {
+    opacity: 1;
+}
+
+/* Quick Action Buttons - Enhanced Hover */
+.btn.w-100.py-3.shadow-sm {
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn.w-100.py-3.shadow-sm::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.btn.w-100.py-3.shadow-sm:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+.btn.w-100.py-3.shadow-sm:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+.btn.w-100.py-3.shadow-sm:active {
+    transform: translateY(-1px);
+}
+
+/* Welcome Card - Subtle Animations */
+.card.shadow-sm {
+    transition: box-shadow 0.3s ease;
+}
+
+.card.shadow-sm:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ===================================================================
+   Typography Enhancements
+   ================================================================ */
+
+/* Stronger, Clearer Text */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+}
+
+/* Card Text - Better Readability */
+.card-body p {
+    color: #555 !important;
+    line-height: 1.7;
+}
+
+.text-muted {
+    color: #666 !important;
+}
+
+/* White Text on Dark Backgrounds */
+.card.text-white h3,
+.card.text-white h6,
+.card.text-white span {
+    color: #fff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ===================================================================
+   Icon Enhancements
+   ================================================================ */
+
+/* Stats Icons - Subtle Pulse */
+@keyframes pulse-icon {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.05);
+    }
+}
+
+.card.text-white:hover .d-flex div:last-child {
+    animation: pulse-icon 2s ease-in-out infinite;
+}
+
+/* Quick Action Icons - Bounce on Hover */
+@keyframes bounce-icon {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.btn.w-100.py-3.shadow-sm:hover i {
+    animation: bounce-icon 0.5s ease;
+}
+
+/* ===================================================================
+   Background Enhancements
+   ================================================================ */
+
+/* Dark Gray Professional Background */
+.main-content {
+    background: #343a40;
+}
+
+/* Keep Card Body Light */
+.card-body[style*="background: #f8f9fa"] {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%) !important;
+}
+
+/* ===================================================================
+   Responsive Adjustments
+   ================================================================ */
+
+@media (max-width: 768px) {
+    /* Smaller Cards on Mobile */
+    .card.text-white .card-body {
+        padding: 1rem !important;
+    }
+    
+    .card.text-white h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    .card.text-white h6 {
+        font-size: 0.8rem !important;
+    }
+    
+    /* Adjust Quick Action Buttons */
+    .btn.w-100.py-3.shadow-sm {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    .btn.w-100.py-3.shadow-sm i {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* ===================================================================
+   Professional Shadows
+   ================================================================ */
+
+/* Enhanced Shadow System */
+.shadow-sm {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+.shadow {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ===================================================================
+   Accessibility Improvements
+   ================================================================ */
+
+/* Focus States */
+.btn:focus,
+a:focus {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+}
+
+/* High Contrast Text */
+.fw-semibold {
+    font-weight: 600 !important;
+}
+
+.fw-bold {
+    font-weight: 700 !important;
+}
+
+/* ===================================================================
+   Loading States (Optional)
+   ================================================================ */
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.card.loading {
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 25%,
+        #e0e0e0 50%,
+        #f0f0f0 75%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* ===================================================================
+   Print Styles
+   ================================================================ */
+
+@media print {
+    .btn,
+    .card.text-white,
+    footer {
+        display: none !important;
+    }
+    
+    .card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+}

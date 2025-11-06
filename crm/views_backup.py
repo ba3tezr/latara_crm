@@ -360,7 +360,7 @@ def get_or_create_company_info():
     company_info = CompanyInfo.objects.first()
     if not company_info:
         company_info = CompanyInfo.objects.create(
-            name='الخواجة للستائر والمفروشات',
+            name='ORIGIN.APP',
             version='1.0.0',
             release_date='2025-04-30',
             developer='zakee tahawi'

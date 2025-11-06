@@ -39,13 +39,13 @@ def invoice_builder(request, template_id=None):
     # التأكد من وجود company_info
     if not company_info:
         company_info = CompanyInfo.objects.create(
-            name="الخواجة للستائر والمفروشات",
+            name="ORIGIN.APP",
             description="نظام متكامل لإدارة العملاء والمبيعات والإنتاج والمخزون",
             version="1.0.0",
             release_date="2025-04-30",
             developer="zakee tahawi",
             working_hours="9 صباحاً - 5 مساءً",
-            copyright_text="جميع الحقوق محفوظة لشركة الخواجة للستائر والمفروشات تطوير zakee tahawi"
+            copyright_text="جميع الحقوق محفوظة لشركة ORIGIN.APP تطوير zakee tahawi"
         )
     
     # جلب بيانات الطلب إذا كان في وضع الطباعة

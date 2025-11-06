@@ -8,7 +8,7 @@
 ./run-production.sh
 ```
 - يستخدم Gunicorn (3 عمال)
-- متاح على: https://elkhawaga.uk
+- متاح على: https://origin.app
 - مراقبة كل دقيقة
 - تشغيل Cloudflare Tunnel
 
@@ -19,7 +19,7 @@
 ```
 - يستخدم Gunicorn (2 عمال)
 - إعادة تحميل تلقائية
-- متاح على: https://elkhawaga.uk
+- متاح على: https://origin.app
 - مراقبة كل 30 ثانية
 - تشغيل Cloudflare Tunnel
 

@@ -1,0 +1,288 @@
+/* ===================================================================
+   BOOTSTRAP 5 CLEAN SIDEBAR - DROPDOWN MENUS
+   =================================================================== */
+
+/* Dropdown Container - Compact */
+.sidebar-dropdown {
+    margin: 0.15rem 0.5rem;
+}
+
+/* Dropdown Toggle - Ultra Compact */
+.sidebar-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: rgba(52, 73, 94, 0.3);
+    border: none;
+    border-radius: 0.25rem;
+    color: #ecf0f1;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: right;
+}
+
+.sidebar-dropdown-toggle:hover {
+    background: #34495e;
+    color: #fff;
+}
+
+.sidebar-dropdown-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+}
+
+/* Active Dropdown */
+.sidebar-dropdown.active .sidebar-dropdown-toggle {
+    background: #34495e;
+    color: #fff;
+}
+
+/* Toggle Content */
+.sidebar-dropdown-toggle-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+/* Dropdown Icons - Ultra Compact */
+.sidebar-dropdown-toggle .sidebar-nav-icon {
+    font-size: 1rem;
+    color: #95a5a6;
+    min-width: 18px;
+    text-align: center;
+}
+
+.sidebar-dropdown-toggle:hover .sidebar-nav-icon,
+.sidebar-dropdown.active .sidebar-dropdown-toggle .sidebar-nav-icon {
+    color: #4a90e2;
+}
+
+/* Arrow Icon - Smaller */
+.sidebar-dropdown-arrow {
+    font-size: 0.7rem;
+    color: #7f8c8d;
+    transition: transform 0.2s ease;
+}
+
+.sidebar-dropdown.active .sidebar-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.sidebar-dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 0.375rem;
+    margin-top: 0.25rem;
+}
+
+.sidebar-dropdown.active .sidebar-dropdown-menu {
+    max-height: 800px;
+}
+
+/* Dropdown Items - Ultra Compact */
+.sidebar-dropdown-item {
+    padding: 0;
+}
+
+.sidebar-dropdown-menu .sidebar-nav-link {
+    padding: 0.4rem 0.75rem 0.4rem 2rem;
+    margin: 0.1rem 0.35rem;
+    font-size: 0.8rem;
+    background: transparent;
+    border-right: 2px solid transparent;
+}
+
+.sidebar-dropdown-menu .sidebar-nav-link:hover {
+    background: rgba(74, 144, 226, 0.15);
+    border-right-color: #4a90e2;
+    padding-right: 0.9rem;
+}
+
+.sidebar-dropdown-menu .sidebar-nav-link.active {
+    background: rgba(74, 144, 226, 0.25);
+    border-right-color: #4a90e2;
+    color: #fff;
+}
+
+/* Dropdown Item Icons - Ultra Compact */
+.sidebar-dropdown-menu .sidebar-nav-icon {
+    font-size: 0.9rem;
+    color: #95a5a6;
+    min-width: 16px;
+}
+
+.sidebar-dropdown-menu .sidebar-nav-link:hover .sidebar-nav-icon {
+    color: #4a90e2;
+}
+
+.sidebar-dropdown-menu .sidebar-nav-link.active .sidebar-nav-icon {
+    color: #fff;
+}
+
+/* ===================================================================
+   USER SECTION - INTEGRATED IN SIDEBAR (NOT FOOTER)
+   =================================================================== */
+
+/* Sidebar Footer - Fully Integrated (No Gap!) */
+.sidebar-footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 240px !important;
+    padding: 0.5rem !important;
+    background: #2c3e50 !important;
+    border-top: 1px solid rgba(74, 144, 226, 0.2) !important;
+    z-index: 10;
+    transition: width 0.3s ease;
+    margin: 0 !important;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar.collapsed .sidebar-footer {
+    width: 70px !important;
+    padding: 0.4rem !important;
+}
+
+/* User Profile - Half Size */
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.4rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.25rem;
+    transition: all 0.2s;
+    margin-bottom: 0.3rem;
+    position: relative;
+}
+
+.sidebar-user:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* User Avatar - Half Size with Online Badge */
+.sidebar-user-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4a90e2;
+    flex-shrink: 0;
+    position: relative;
+}
+
+/* Online Badge - Green Indicator */
+.sidebar-user-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 8px;
+    height: 8px;
+    background: #27ae60;
+    border: 2px solid #2c3e50;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(39, 174, 96, 0.5);
+}
+
+/* User Info - Ultra Compact */
+.sidebar-user-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.sidebar-user-name {
+    font-weight: 600;
+    font-size: 0.7rem;
+    color: #fff !important;
+    margin: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-user-role {
+    font-size: 0.6rem;
+    color: #bdc3c7 !important;
+    margin: 0;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Logout Button - Red Text & Small Size */
+.sidebar-logout {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 0.25rem 0.4rem !important;
+    background: transparent !important;
+    color: #e74c3c !important;
+    border: 1px solid #e74c3c !important;
+    border-radius: 0.25rem !important;
+    font-size: 0.65rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: all 0.15s !important;
+    gap: 0.25rem !important;
+}
+
+.sidebar-logout:hover {
+    background: #e74c3c !important;
+    color: #fff !important;
+    border-color: #e74c3c !important;
+}
+
+.sidebar-logout:active {
+    background: #c0392b !important;
+    border-color: #c0392b !important;
+}
+
+.sidebar-logout i {
+    font-size: 0.65rem !important;
+    color: #e74c3c !important;
+}
+
+.sidebar-logout:hover i,
+.sidebar-logout:hover span {
+    color: #fff !important;
+}
+
+.sidebar-logout span {
+    color: #e74c3c !important;
+}
+
+/* Collapsed State - Clean Icons Only */
+.sidebar.collapsed .sidebar-user-info,
+.sidebar.collapsed .sidebar-user-name,
+.sidebar.collapsed .sidebar-user-role,
+.sidebar.collapsed .sidebar-logout span {
+    display: none;
+}
+
+.sidebar.collapsed .sidebar-user {
+    justify-content: center;
+    padding: 0.4rem;
+}
+
+.sidebar.collapsed .sidebar-user-avatar {
+    width: 28px;
+    height: 28px;
+}
+
+.sidebar.collapsed .sidebar-logout {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}

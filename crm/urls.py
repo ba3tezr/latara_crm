@@ -26,6 +26,7 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     # المسارات الأساسية
     path("", views.home, name="home"),
+    path("home-new/", TemplateView.as_view(template_name="home_new.html"), name="home_new"),  # TEST NEW DESIGN
     path("admin-dashboard/", views.admin_dashboard, name="admin_dashboard"),
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact"),

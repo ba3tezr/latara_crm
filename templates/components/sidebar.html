@@ -1,0 +1,348 @@
+{% load static %}
+{% load complaints_permissions %}
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+    <!-- Sidebar Header with User Info -->
+    <div class="sidebar-header">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar" title="طي/فتح القائمة" data-bs-toggle="tooltip">
+            <i class="fas fa-bars" id="sidebarToggleIcon"></i>
+        </button>
+        <div class="sidebar-logo">
+            {% if company_info.header_logo %}
+                <img src="{{ company_info.header_logo.url }}" alt="{{ company_info.name|default:'ORIGIN.APP' }}">
+            {% elif company_info.logo %}
+                <img src="{{ company_info.logo.url }}" alt="{{ company_info.name|default:'ORIGIN.APP' }}">
+            {% else %}
+                <img src="{% static 'img/logo.png' %}" alt="ORIGIN.APP">
+            {% endif %}
+            <span class="sidebar-logo-text">{{ company_info.name|default:'ORIGIN.APP' }}</span>
+        </div>
+    </div>
+    
+    <!-- User Info Bar Below Header -->
+    {% if user.is_authenticated %}
+    <div style="background: rgba(74, 144, 226, 0.1); padding: 0.5rem 1rem; border-bottom: 1px solid rgba(74, 144, 226, 0.2); display: flex; align-items: center; gap: 0.5rem;">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: #4a90e2; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.75rem; font-weight: 700; flex-shrink: 0;">
+            {{ user.username|first|upper }}
+        </div>
+        <div style="flex: 1; min-width: 0;">
+            <div style="font-size: 0.75rem; font-weight: 600; color: #fff; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                {{ user.get_full_name|default:user.username }}
+            </div>
+            <div style="font-size: 0.65rem; color: #bdc3c7; line-height: 1.1;">
+                {% if user.is_superuser %}مدير النظام{% elif user.is_staff %}موظف{% else %}مستخدم{% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-nav">
+        {% if user.is_authenticated %}
+            <!-- Home Section -->
+            <div class="sidebar-nav-section">
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item">
+                        <a href="{% url 'home' %}" class="sidebar-nav-link {% if request.path == '/' %}active{% endif %}">
+                            <i class="fas fa-home sidebar-nav-icon"></i>
+                            <span class="sidebar-nav-text">الرئيسية</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            {% if user.groups.all %}
+                {% for group in user.groups.all %}
+                    {% if group.name == 'قسم التقطيع' %}
+                        <!-- Cutting Department Section -->
+                <div class="sidebar-nav-section">
+                    <div class="sidebar-nav-title">نظام التقطيع</div>
+                    <ul class="sidebar-nav-list">
+                        <li class="sidebar-nav-item">
+                            <a href="/cutting/" class="sidebar-nav-link">
+                                <i class="fas fa-cut sidebar-nav-icon"></i>
+                                <span class="sidebar-nav-text">نظام التقطيع</span>
+                            </a>
+                        </li>
+                        {% if user.assigned_warehouse %}
+                        <li class="sidebar-nav-item">
+                            <a href="/cutting/orders/warehouse/{{ user.assigned_warehouse.id }}/" class="sidebar-nav-link">
+                                <i class="fas fa-warehouse sidebar-nav-icon"></i>
+                                <span class="sidebar-nav-text">{{ user.assigned_warehouse.name }}</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="sidebar-nav-item">
+                            <a href="/cutting/orders/completed/" class="sidebar-nav-link">
+                                <i class="fas fa-list-check sidebar-nav-icon"></i>
+                                <span class="sidebar-nav-text">أوامر التقطيع المجمعة</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {% if user.is_staff %}
+                <!-- Staff/Admin Section -->
+                <div class="sidebar-nav-section">
+                    <div class="sidebar-nav-title">الأقسام الرئيسية</div>
+                    <ul class="sidebar-nav-list">
+                        <li class="sidebar-nav-item">
+                            <a href="/customers/" class="sidebar-nav-link">
+                                <i class="fas fa-users sidebar-nav-icon"></i>
+                                <span class="sidebar-nav-text">العملاء</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                            <a href="/orders/" class="sidebar-nav-link">
+                                <i class="fas fa-shopping-cart sidebar-nav-icon"></i>
+                                <span class="sidebar-nav-text">الطلبات</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                            <a href="/inspections/" class="sidebar-nav-link">
+                                <i class="fas fa-clipboard-check sidebar-nav-icon"></i>
+                                <span class="sidebar-nav-text">المعاينات</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                            <a href="/installations/" class="sidebar-nav-link">
+                                <i class="fas fa-tools sidebar-nav-icon"></i>
+                                <span class="sidebar-nav-text">التركيبات</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Inventory Section -->
+                <div class="sidebar-nav-section">
+                    <div class="sidebar-nav-title">إدارة المخزون</div>
+                    <ul class="sidebar-nav-list">
+                        <li class="sidebar-nav-item sidebar-dropdown">
+                            <button class="sidebar-dropdown-toggle">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <i class="fas fa-boxes sidebar-nav-icon"></i>
+                                    <span class="sidebar-nav-text">المخزون</span>
+                                </div>
+                                <i class="fas fa-chevron-down sidebar-dropdown-arrow"></i>
+                            </button>
+                            <div class="sidebar-dropdown-menu">
+                                <ul class="sidebar-nav-list">
+                                    <li class="sidebar-nav-item">
+                                        <a href="/inventory/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-warehouse sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">إدارة المخزون</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="{% url 'inventory:warehouse_list' %}" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-warehouse sidebar-nav-icon text-info"></i>
+                                            <span class="sidebar-nav-text">إدارة المستودعات</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="{% url 'inventory:stock_transfer_create' %}" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-bolt sidebar-nav-icon text-warning"></i>
+                                            <span class="sidebar-nav-text">تحويلات مخزنية</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="{% url 'inventory:stock_transfer_list' %}" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-list sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">عرض التحويلات</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="/cutting/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-cut sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">نظام التقطيع</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="/cutting/orders/completed/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-list-check sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">أوامر التقطيع</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="/cutting/reports/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-chart-bar sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">تقارير التقطيع</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="/manufacturing/product-receipt/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-box-open sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">استلام المنتجات</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Manufacturing Section -->
+                <div class="sidebar-nav-section">
+                    <div class="sidebar-nav-title">التصنيع</div>
+                    <ul class="sidebar-nav-list">
+                        <li class="sidebar-nav-item sidebar-dropdown">
+                            <button class="sidebar-dropdown-toggle">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <i class="fas fa-industry sidebar-nav-icon"></i>
+                                    <span class="sidebar-nav-text">المصنع</span>
+                                </div>
+                                <i class="fas fa-chevron-down sidebar-dropdown-arrow"></i>
+                            </button>
+                            <div class="sidebar-dropdown-menu">
+                                <ul class="sidebar-nav-list">
+                                    <li class="sidebar-nav-item">
+                                        <a href="/manufacturing/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-list sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">أوامر التصنيع</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="/manufacturing/fabric-receipt/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-industry sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">استلام من المصنع</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="/manufacturing/production-reports/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-chart-line sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">تقارير الإنتاج</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Complaints Section -->
+                <div class="sidebar-nav-section">
+                    <div class="sidebar-nav-title">خدمة العملاء</div>
+                    <ul class="sidebar-nav-list">
+                        <li class="sidebar-nav-item sidebar-dropdown">
+                            <button class="sidebar-dropdown-toggle">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <i class="fas fa-exclamation-triangle sidebar-nav-icon"></i>
+                                    <span class="sidebar-nav-text">الشكاوى</span>
+                                </div>
+                                <i class="fas fa-chevron-down sidebar-dropdown-arrow"></i>
+                            </button>
+                            <div class="sidebar-dropdown-menu">
+                                <ul class="sidebar-nav-list">
+                                    <li class="sidebar-nav-item">
+                                        <a href="/complaints/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-tachometer-alt sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">لوحة التحكم</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="/complaints/list/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-list sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">قائمة الشكاوى</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="/complaints/admin/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-shield-alt sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">شكاوى غير محلولة</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="/complaints/reports/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-chart-line sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">التقارير</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-nav-item">
+                                        <a href="/complaints/create/" class="sidebar-nav-link sidebar-dropdown-item">
+                                            <i class="fas fa-plus sidebar-nav-icon"></i>
+                                            <span class="sidebar-nav-text">شكوى جديدة</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Reports & Management Section -->
+                <div class="sidebar-nav-section">
+                    <div class="sidebar-nav-title">الإدارة</div>
+                    <ul class="sidebar-nav-list">
+                        <li class="sidebar-nav-item">
+                            <a href="/reports/list/" class="sidebar-nav-link">
+                                <i class="fas fa-chart-bar sidebar-nav-icon"></i>
+                                <span class="sidebar-nav-text">التقارير</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                            <a href="/database/" class="sidebar-nav-link">
+                                <i class="fas fa-database sidebar-nav-icon"></i>
+                                <span class="sidebar-nav-text">إدارة البيانات</span>
+                            </a>
+                        </li>
+                        {% if user.is_superuser %}
+                        <li class="sidebar-nav-item">
+                            <a href="/admin/" class="sidebar-nav-link">
+                                <i class="fas fa-cog sidebar-nav-icon"></i>
+                                <span class="sidebar-nav-text">لوحة الإدارة</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+            {% else %}
+                <!-- Regular Users - Custom Departments -->
+                <div class="sidebar-nav-section">
+                    <div class="sidebar-nav-title">الأقسام المخصصة</div>
+                    <ul class="sidebar-nav-list">
+                        {% for dept in user_parent_departments %}
+                        <li class="sidebar-nav-item">
+                            <a href="/{{ dept.code }}/" class="sidebar-nav-link" title="{{ dept.name }}">
+                                <i class="{{ dept.icon|default:'fas fa-folder' }} sidebar-nav-icon"></i>
+                                <span class="sidebar-nav-text">{{ dept.name }}</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+        {% else %}
+            <!-- Not Authenticated -->
+            <div class="sidebar-nav-section">
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item">
+                        <a href="{% url 'accounts:login' %}" class="sidebar-nav-link">
+                            <i class="fas fa-sign-in-alt sidebar-nav-icon"></i>
+                            <span class="sidebar-nav-text">تسجيل الدخول</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Logout Button - Integrated at Bottom (Small) -->
+        {% if user.is_authenticated %}
+        <div class="sidebar-nav-section" style="margin-top: auto; padding-bottom: 0.75rem;">
+            <ul class="sidebar-nav-list">
+                <li class="sidebar-nav-item">
+                    <a href="{% url 'accounts:logout' %}" class="sidebar-nav-link" style="color: #e74c3c !important; border: 1px solid #e74c3c; border-radius: 0.25rem; background: transparent; justify-content: center; padding: 0.4rem 0.6rem; font-size: 0.8rem;">
+                        <i class="fas fa-sign-out-alt sidebar-nav-icon" style="color: #e74c3c !important; font-size: 0.9rem;"></i>
+                        <span class="sidebar-nav-text" style="color: #e74c3c !important; font-size: 0.8rem;">خروج</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+    </nav>
+</aside>

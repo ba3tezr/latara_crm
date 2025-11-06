@@ -19,9 +19,9 @@ import json
 
 
 # تطبيق الإعدادات على الموقع الافتراضي
-admin.site.site_header = "نظام إدارة الخواجة"
+admin.site.site_header = "نظام إدارة ORIGIN.APP"
 admin.site.site_title = "لوحة التحكم"
-admin.site.index_title = "مرحباً بك في نظام إدارة الخواجة"
+admin.site.index_title = "مرحباً بك في نظام إدارة ORIGIN.APP"
 
 
 def get_admin_stats():
